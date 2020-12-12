@@ -7,10 +7,12 @@ use Rain\Tpl;
 class Page
 {
     private $tpl;
+    private $options = [];
     private $defaults = [
+        'header' => true,
+        'footer' => true,
         'data' => [],
     ];
-    private $options = [];
 
     public function __construct($opts = [], $tpl_dir = '/views/')
     {
@@ -28,12 +30,16 @@ class Page
 
         $this->setData($this->options['data']);
 
-        $this->tpl->draw('header');
+        if ($this->options['header']) {
+            $this->tpl->draw('header');
+        }
     }
 
     public function __destruct()
     {
-        $this->tpl->draw('footer');
+        if ($this->options['footer']) {
+            $this->tpl->draw('footer');
+        }
     }
 
     public function setTpl($name, $data = [], $returnHTML = false)
