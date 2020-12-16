@@ -7,7 +7,6 @@ use Hcode\PageAdmin;
 $app->get('/admin/products', function () {
     User::verifyLogin();
 
-
     $search = (isset($_GET['search'])) ? $_GET['search'] : '';
     $page = (isset($_GET['page'])) ? (int) $_GET['page'] : 1;
 
@@ -29,7 +28,6 @@ $app->get('/admin/products', function () {
         ]);
     }
 
-    $products = Product::listAll();
     $page = new PageAdmin();
 
     $page->setTpl('products', [
